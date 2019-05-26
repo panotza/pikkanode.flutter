@@ -1,32 +1,144 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(MaterialApp(
+      title: 'Pikkanode',
+      theme: ThemeData(
+        primaryColor: Colors.white,
+      ),
+      home: Home(title: 'Pikkanode'),
+    ));
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class PhotoList extends StatelessWidget {
+  const PhotoList({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+    return Container(
+      child: ListView(
+        children: <Widget>[
+          Photo(),
+          SizedBox(height: 20),
+          Photo(),
+          SizedBox(height: 20),
+          Photo(),
+          SizedBox(height: 20),
+          Photo(),
+        ],
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class Photo extends StatelessWidget {
+  const Photo({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white10,
+        borderRadius: BorderRadius.all(Radius.circular(18)),
+      ),
+      child: Column(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.only(left: 12),
+            height: 50,
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.people, size: 30, color: Colors.white),
+                Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Text(
+                    'User 1',
+                    style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          FractionallySizedBox(
+            widthFactor: 0.9,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.all(Radius.circular(18)),
+              ),
+              child: FlutterLogo(
+                size: 200.0,
+              ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 12),
+            height: 50,
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.star, size: 30, color: Colors.amber),
+                Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Text(
+                    '100 likes',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Home extends StatefulWidget {
+  Home({Key key, this.title}) : super(key: key);
+
+  final String title;
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+            colors: [Color(0xFF696D77), Color(0xFF292C36)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            tileMode: TileMode.clamp),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text(
+            widget.title,
+            style: TextStyle(color: Colors.white, fontSize: 30),
+          ),
+          centerTitle: true,
+        ),
+        body: Padding(
+          padding: EdgeInsets.all(25),
+          child: PhotoList(),
+        ),
+      ),
+    );
+  }
+}
+
+class Landing extends StatefulWidget {
+  Landing({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -40,10 +152,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _LandingState createState() => _LandingState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _LandingState extends State<Landing> {
   int _counter = 0;
 
   void _incrementCounter() {
